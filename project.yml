@@ -68,14 +68,14 @@ targets:
     - package: Alamofire
     - package: ApexyAlamofire
     - package: Apexy
-    - package: swiftui
+    - package: PhotoCalendar
   packages:
     type: framework
     platform: iOS
     settings:
       GENERATE_INFOPLIST_FILE: YES
     dependencies:
-    - package: swiftui
+    - package: PhotoCalendar
   tests:
     type: bundle.unit-test
     platform: iOS
@@ -99,5 +99,5 @@ packages:
   ApexyAlamofire:
     url: https://github.com/RedMadRobot/apexy-ios.git
     version: 1.7.2
-  swiftui:
-    path: packages/swiftui
+  PhotoCalendar:
+    path: packages/PhotoCalendar

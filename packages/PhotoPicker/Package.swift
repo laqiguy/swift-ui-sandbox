@@ -6,7 +6,7 @@ import PackageDescription
 let package = Package(
     name: "PhotoPicker",
     platforms: [
-        .macOS(.v10_14), .iOS(.v13), .tvOS(.v13)
+        .macOS(.v10_14), .iOS(.v15), .tvOS(.v15)
     ],
     products: [
         // Products define the executables and libraries a package produces, making them visible to other packages.
