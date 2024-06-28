@@ -35,7 +35,7 @@ struct ContentView<VM: ViewModelP>: View {
             } else {
                 Text("Choose Photo")
                     .onTapGesture {
-                        isPhotoPickerShowed.toggle()
+                        isPhotoPickerShowed = true
                     }
             }
             Text("Hello, world!")
@@ -43,7 +43,7 @@ struct ContentView<VM: ViewModelP>: View {
         }
         .padding()
         .sheet(isPresented: $isPhotoPickerShowed) {
-            PhotoPicker(imageData: $viewModel.imageData)
+            PhotoPicker(isPresented: $isPhotoPickerShowed, imageData: $viewModel.imageData)
         }
     }
 }
