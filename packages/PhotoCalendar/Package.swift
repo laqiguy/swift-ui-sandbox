@@ -22,6 +22,11 @@ let package = Package(
             name: "PhotoCalendar",
             dependencies: [
                 "PhotoPicker"
+            ],
+            resources: [
+                .copy("Resources/Images.xcassets"),
+                .copy("Resources/Fonts/CoFoRedmadrobot-Regular.otf"),
+                .copy("Resources/Fonts/CoFoSans-Regular.ttf")
             ]
         ),
         .testTarget(

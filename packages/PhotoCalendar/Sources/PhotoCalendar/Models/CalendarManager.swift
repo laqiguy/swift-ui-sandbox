@@ -15,7 +15,7 @@ public class CalendarManager {
     var locale: Locale {
         return calendar.locale!
     }
-    private (set) public var calendar: Calendar
+    private(set) public var calendar: Calendar
     
     static func calendar(with option: Option) -> Calendar {
         let id = option == .ru ? "ru_RU" : "en_EN"
