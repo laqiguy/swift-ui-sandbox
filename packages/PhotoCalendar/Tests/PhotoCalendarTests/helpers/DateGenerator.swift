@@ -9,17 +9,17 @@ import Foundation
 
 enum DateGenerator {
     
-    private static let formatter: DateFormatter = {
-        let formatter = DateFormatter()
-        formatter.dateFormat = "dd.MM.yyyy"
-        return formatter
-    }()
+    private static let formatter = Date
+        .FormatStyle()
+        .year(.twoDigits)
+        .month(.twoDigits)
+        .day(.twoDigits)
     
     static func date(from: String) -> Date {
-        return formatter.date(from: from)!
+        return try! formatter.parse(from)
     }
     
     static func string(from: Date) -> String {
-        return formatter.string(from: from)
+        return formatter.format(from)
     }
 }

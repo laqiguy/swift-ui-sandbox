@@ -47,13 +47,13 @@ public struct TextParametersEditorView: View {
                 Spacer(minLength: 34)
             }
         }
-        .onChange(of: textParameters.family, perform: { newValue in
+        onChange(of: textParameters.family) { newValue in
             textParameters.family = newValue
             textParameters.font = UIFont.fontNames(forFamilyName: newValue)[0]
-        })
-        .onChange(of: textParameters.mainTextColor, perform: { newValue in
+        }
+        .onChange(of: textParameters.mainTextColor) { newValue in
             textParameters.shadowColor = newValue == .black ? .white : .black
-        })
+        }
         .padding()
     }
 }

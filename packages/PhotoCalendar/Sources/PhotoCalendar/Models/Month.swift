@@ -19,6 +19,7 @@ struct Month {
         
         let id: ID
         let date: Date
+        let value: String
         let isCurrentMonth: Bool
         var status: Status
         
@@ -27,6 +28,7 @@ struct Month {
             self.date = date
             self.isCurrentMonth = isCurrentMonth
             self.status = status
+            self.value = date.formatted(.dateTime.day(.defaultDigits))
         }
     }
     

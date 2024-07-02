@@ -14,7 +14,7 @@ extension Color {
 final public class TextParameters: ObservableObject {
     var textColors: [Color] = [.white, .black, .redMadColor]
     @Published var mainTextColor: Color = .white
-    @Published var dayoffTextColor: Color = .white
+    @Published var dayoffTextColor: Color = .redMadColor
     @Published var shadowColor: Color = .black
     
     @Published var family: String = "CoFo Redmadrobot"
