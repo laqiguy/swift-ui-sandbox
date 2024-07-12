@@ -26,3 +26,8 @@ struct WeekHeaderView: View {
         }
     }
 }
+
+#Preview {
+    WeekHeaderView(data: ["пн","вт","ср","чт","пт","сб","вс"])
+        .environmentObject(TextParameters())
+}

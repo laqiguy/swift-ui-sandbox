@@ -20,19 +20,3 @@ extension Date {
         }
     }
 }
-
-extension DateInterval {
-    static func arrayOfDays(for dateInterval: DateInterval, with calendar: Calendar) -> [Date] {
-        if dateInterval.start > dateInterval.end { return [Date]() }
-
-        var tempDate = dateInterval.start
-        var array = [tempDate]
-
-        while tempDate < dateInterval.end {
-            tempDate = calendar.date(byAdding: .day, value: 1, to: tempDate)!
-            array.append(tempDate)
-        }
-
-        return array
-    }
-}

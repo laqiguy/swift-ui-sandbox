@@ -11,7 +11,7 @@ import Testing
     }
     
     @Test func April2024Test() {
-        let date = DateGenerator.date(from: "01.04.2024")
+        let date = DateGenerator.date(from: "12.04.2024")
         let month = Month(date: date, with: calendar)
         
         #expect(month.name == "апрель")
@@ -26,7 +26,7 @@ import Testing
     }
     
     @Test func May2024Test() {
-        let date = DateGenerator.date(from: "01.05.2024")
+        let date = DateGenerator.date(from: "13.05.2024")
         let month = Month(date: date, with: calendar)
         
         #expect(month.name == "май")
@@ -41,7 +41,7 @@ import Testing
     }
 
     @Test func June2024Test() {
-        let date = DateGenerator.date(from: "01.06.2024")
+        let date = DateGenerator.date(from: "14.06.2024")
         let month = Month(date: date, with: calendar)
         
         #expect(month.name == "июнь")
@@ -56,7 +56,7 @@ import Testing
     }
     
     @Test func Septemnber2024Test() {
-        let date = DateGenerator.date(from: "01.09.2024")
+        let date = DateGenerator.date(from: "15.09.2024")
         let month = Month(date: date, with: calendar)
         
         #expect(month.name == "сентябрь")
@@ -68,5 +68,20 @@ import Testing
         }
         #expect(DateGenerator.string(from: month.values[0].values[0].date) == "26.08.2024")
         #expect(DateGenerator.string(from: month.values[5].values[6].date) == "06.10.2024")
+    }
+    
+    @Test func December2024Test() {
+        let date = DateGenerator.date(from: "23.12.2024")
+        let month = Month(date: date, with: calendar)
+        
+        #expect(month.name == "декабрь")
+        #expect(month.values.count == 6)
+        #expect(month.values[0].number == 48)
+        #expect(month.values[5].number == 1)
+        for week in month.values {
+            #expect(week.values.count == 7)
+        }
+        #expect(DateGenerator.string(from: month.values[0].values[0].date) == "25.11.2024")
+        #expect(DateGenerator.string(from: month.values[5].values[6].date) == "05.01.2025")
     }
 }

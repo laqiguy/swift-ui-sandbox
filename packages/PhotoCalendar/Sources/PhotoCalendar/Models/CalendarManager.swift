@@ -1,6 +1,6 @@
 import Foundation
 
-public class CalendarManager {
+public final class CalendarManager: ObservableObject {
     
     enum Option {
         case ru

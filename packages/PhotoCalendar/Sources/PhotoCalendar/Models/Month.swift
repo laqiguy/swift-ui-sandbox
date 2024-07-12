@@ -46,23 +46,24 @@ struct Month {
     }
     
     init(date: Date, with calendar: Calendar) {
-        let weekDates = makeMonth(from: date, with: calendar)
-        let weeks = weekDates.map { week in
-            week.map { day in
-                Day(
-                    date: day,
-                    isCurrentMonth: calendar.isDate(day, equalTo: date, toGranularity: .month)
-                )
+        let weekDates = generateMonth(for: date, with: calendar)
+        let weeks = weekDates
+            .map { week in
+                week.map { day in
+                    Day(
+                        date: day,
+                        isCurrentMonth: calendar.isDate(day, equalTo: date, toGranularity: .month)
+                    )
+                }
+            }.map { week in
+                (number: calendar.component(.weekOfYear, from: week[0].date), values: week)
             }
-        }.map { week in
-            (number: calendar.component(.weekOfYear, from: week[0].date), values: week)
-        }
         self.init(name: date.monthName, weeks: weeks)
     }
     
     mutating func updateDaysStatus(with checker: DayChecker) {
         for i in 0..<values.count {
-            for j in 0..<7 {
+            for j in 0..<values[i].values.count {
                 values[i].values[j].status = checker.status(for: values[i].values[j].date)
             }
         }

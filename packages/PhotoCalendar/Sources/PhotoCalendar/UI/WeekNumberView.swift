@@ -22,3 +22,8 @@ struct WeekNumberView: View {
             .frame(width: 24 * textParameters.scale, height: 24 * textParameters.scale)
     }
 }
+
+#Preview {
+    WeekNumberView(data: "12")
+        .environmentObject(TextParameters())
+}

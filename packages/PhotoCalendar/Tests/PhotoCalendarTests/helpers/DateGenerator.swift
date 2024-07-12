@@ -11,7 +11,7 @@ enum DateGenerator {
     
     private static let formatter = Date
         .FormatStyle()
-        .year(.twoDigits)
+        .year(.defaultDigits)
         .month(.twoDigits)
         .day(.twoDigits)
     
