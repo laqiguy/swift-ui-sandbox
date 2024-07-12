@@ -8,10 +8,25 @@
 import SwiftUI
 
 struct ImageZoomDragView: View {
-    @State private var scale: CGFloat = 1.0
-    @State private var currentScale: CGFloat = 1.0
-    @State private var currentPosition: CGSize = .zero
-    @State private var translation: CGSize = .zero
+    
+    struct ViewModel {
+        var scale: CGFloat = 1.0
+        var currentScale: CGFloat = 1.0
+        var currentPosition: CGSize = .zero
+        var translation: CGSize = .zero
+                
+        mutating func finalizeScale(_ scale: CGFloat) {
+            self.scale *= scale
+            currentScale = 1.0
+        }
+        
+        mutating func finalizeTranslation(_ translation: CGSize) {
+            self.translation += translation
+            currentPosition = .zero
+        }
+    }
+    
+    @State private var viewModel: ViewModel = .init()
 
     let image: Image
     
@@ -19,33 +34,23 @@ struct ImageZoomDragView: View {
         image
             .resizable()
             .scaledToFill()
-            .scaleEffect(scale * currentScale)
-            .offset(currentPosition + translation)
+            .scaleEffect(viewModel.scale * viewModel.currentScale)
+            .offset(viewModel.currentPosition + viewModel.translation)
             .gesture(
                 DragGesture()
                     .onChanged { value in
-                        currentPosition = value.translation
+                        viewModel.currentPosition = value.translation
                     }
-                    .onEnded { value in
-                        translation = translation + currentPosition
-                        currentPosition = .zero
-                    }
+                    .onEnded { viewModel.finalizeTranslation($0.translation) }
             )
             .gesture(
                 MagnificationGesture()
                     .onChanged { value in
-                        currentScale = value
+                        viewModel.currentScale = value
                     }
-                    .onEnded { value in
-                        scale *= currentScale
-                        currentScale = 1.0
-                    }
+                    .onEnded { viewModel.finalizeScale($0) }
             )
     }
-}
-
-func +(left: CGSize, right: CGSize) -> CGSize {
-    CGSize(width: left.width + right.width, height: left.height + right.height)
 }
 
 #Preview {
