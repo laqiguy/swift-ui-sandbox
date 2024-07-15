@@ -24,7 +24,7 @@ public struct TextParametersEditorView: View {
                 ColorSelectorView(colors: textParameters.textColors, color: $textParameters.mainTextColor)
                 ColorSelectorView(colors: textParameters.textColors, color: $textParameters.dayoffTextColor)
                 Picker("Выбери шрифт", selection: $textParameters.family) {
-                    ForEach(UIFont.familyNames, id: \.self) {
+                    ForEach(textParameters.families, id: \.self) {
                         Text($0)
                     }
                 }.pickerStyle(.wheel)
@@ -35,21 +35,18 @@ public struct TextParametersEditorView: View {
                 step: textParameters.fontScaleStep) {
                     Text("Размер шрифта")
                 }
-            if UIFont.fontNames(forFamilyName: textParameters.family).count > 1 {
+            if textParameters.fonts.count > 1 {
                 Picker("", selection: $textParameters.font) {
                     ForEach(
-                        UIFont.fontNames(forFamilyName: textParameters.family),
-                        id: \.self) { name in
-                            Text(name).font(.custom(name, size: 14 * textParameters.scale))
-                        }
+                        textParameters.fonts,
+                        id: \.self)
+                    { name in
+                        Text(name).font(.custom(name, size: 14 * textParameters.scale))
+                    }
                 }
             } else {
                 Spacer(minLength: 34)
             }
-        }
-        onChange(of: textParameters.family) { newValue in
-            textParameters.family = newValue
-            textParameters.font = UIFont.fontNames(forFamilyName: newValue)[0]
         }
         .onChange(of: textParameters.mainTextColor) { newValue in
             textParameters.shadowColor = newValue == .black ? .white : .black

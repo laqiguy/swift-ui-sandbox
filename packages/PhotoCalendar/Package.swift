@@ -25,8 +25,8 @@ let package = Package(
             ],
             resources: [
                 .copy("Resources/Images.xcassets"),
-                .copy("Resources/Fonts/CoFoRedmadrobot-Regular.otf"),
-                .copy("Resources/Fonts/CoFoSans-Regular.ttf")
+                .process("Resources/Fonts/CoFoRedmadrobot-Regular.otf"),
+                .process("Resources/Fonts/CoFoSans-Regular.ttf")
             ]
         ),
         .testTarget(
