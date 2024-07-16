@@ -37,12 +37,14 @@ struct Month {
     let id: String
     var name: String
     var values: [Week]
+    var weekSymbols: [String]
     
-    init(name: String, weeks: [Week]) {
+    init(name: String, weeks: [Week], weekSymbols: [String]) {
         let date = weeks[0].values.first(where: { $0.isCurrentMonth })!.date
         self.id = date.formatted(.iso8601.month().year())
         self.name = name
         self.values = weeks
+        self.weekSymbols = weekSymbols
     }
     
     init(date: Date, with calendar: Calendar) {
@@ -58,7 +60,13 @@ struct Month {
             }.map { week in
                 (number: calendar.component(.weekOfYear, from: week[0].date), values: week)
             }
-        self.init(name: date.monthName, weeks: weeks)
+        
+        var weekSymbols: [String] = calendar.veryShortWeekdaySymbols
+        if calendar.firstWeekday != 1 {
+            weekSymbols.move(fromOffsets: IndexSet(integersIn: 0..<(calendar.firstWeekday - 1)), toOffset: weekSymbols.count - 1)
+        }
+        
+        self.init(name: date.monthName, weeks: weeks, weekSymbols: weekSymbols)
     }
     
     mutating func updateDaysStatus(with checker: DayChecker) {

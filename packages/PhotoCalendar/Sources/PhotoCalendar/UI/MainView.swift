@@ -12,13 +12,14 @@ struct MainView: View {
     
     @EnvironmentObject var textParameters: TextParameters
     
-    @State var viewModel: MainViewModel = MainViewModel(date: Date())
+    @State var viewModel: MainViewModel
     
     @State var isShowPhotoPicker: Bool = false
     @State var isShowFontPicker: Bool = false
     @State var isShowDatePicker: Bool = false
     
-    init() {
+    init(calendarManager: CalendarManager) {
+        viewModel = MainViewModel(date: Date(), calendarManager: calendarManager)
     }
     
     var body: some View {
@@ -48,7 +49,7 @@ struct MainView: View {
                     if viewModel.showWeekNumber {
                         WeekNumberView(data: " ")
                     }
-                    WeekHeaderView(data: viewModel.weekDaysNames)
+                    WeekHeaderView(data: viewModel.month.weekSymbols)
                 }
                 VStack(spacing: 4 * textParameters.scale) {
                     ForEach(viewModel.month.values, id: \.number) { element in
@@ -93,6 +94,6 @@ struct MainView: View {
 }
 
 #Preview {
-    MainView()
+    MainView(calendarManager: CalendarManager(option: .en))
         .environmentObject(TextParameters())
 }

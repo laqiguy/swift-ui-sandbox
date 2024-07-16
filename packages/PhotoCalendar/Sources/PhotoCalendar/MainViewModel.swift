@@ -17,24 +17,17 @@ class MainViewModel {
     @Published var isBlurred: Bool = false
 //    let manager = BusinessCalendarManager()
 //    var businessCalendars: [Int: BusinessCalendar] = [:]
-    
-    let weekDaysNames: [String]
-    
-    init(date: Date) {
-        self.current = date
+
+    init(date: Date, calendarManager: CalendarManager) {
+        current = date
         self.date = date
-        self.month = Month(date: date, with: Calendar.current) //Month.generate(for: date, businessCalendar: manager.getBusinessCalendar(for: date))
-        
-        var weekdays = Calendar.current.veryShortWeekdaySymbols
-        let first = weekdays.remove(at: 0)
-        weekdays.append(first)
-        weekDaysNames = weekdays
+        month = Month(date: date, with: calendarManager.calendar)
     }
-    
+
     func updateMonth() {
 //        month.update(date, businessCalendar: manager.getBusinessCalendar(for: date))
     }
-    
+
     func load() async {
 //        await manager.load(for: date)
     }
