@@ -82,7 +82,7 @@ struct DateEditorView: View {
                 })
                 .pickerStyle(.wheel)
             }
-        }
+        }.presentationDetents([.fraction(0.3)])
     }
 }
 
@@ -91,5 +91,5 @@ struct DateEditorView: View {
         current: Date(),
         date: .constant(Date()),
         showWeekNumber: .constant(true),
-        calendarManager: calendarManager)
+        calendarManager: CalendarManager(option: .ru))
 }

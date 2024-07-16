@@ -52,6 +52,7 @@ public struct TextParametersEditorView: View {
             textParameters.shadowColor = newValue == .black ? .white : .black
         }
         .padding()
+        .presentationDetents([.fraction(0.3)])
     }
 }
 

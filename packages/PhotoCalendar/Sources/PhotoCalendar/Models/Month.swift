@@ -66,7 +66,7 @@ struct Month {
             weekSymbols.move(fromOffsets: IndexSet(integersIn: 0..<(calendar.firstWeekday - 1)), toOffset: weekSymbols.count - 1)
         }
         
-        self.init(name: date.monthName, weeks: weeks, weekSymbols: weekSymbols)
+        self.init(name: Date.Helper.monthName(for: date, with: calendar), weeks: weeks, weekSymbols: weekSymbols)
     }
     
     mutating func updateDaysStatus(with checker: DayChecker) {

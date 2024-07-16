@@ -8,7 +8,7 @@
 import Foundation
 import SwiftUI
 
-class MainViewModel {
+public class MainViewModel {
     @Published var image: Data? = UIImage(named: "jake", in: .module, with: .none)?.pngData()
     let current: Date
     @Published var date: Date
@@ -18,7 +18,7 @@ class MainViewModel {
 //    let manager = BusinessCalendarManager()
 //    var businessCalendars: [Int: BusinessCalendar] = [:]
 
-    init(date: Date, calendarManager: CalendarManager) {
+    public init(date: Date, calendarManager: CalendarManager) {
         current = date
         self.date = date
         month = Month(date: date, with: calendarManager.calendar)

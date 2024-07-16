@@ -2,12 +2,12 @@ import Foundation
 
 public final class CalendarManager: ObservableObject {
     
-    enum Option {
+    public enum Option {
         case ru
         case en
     }
     
-    var option: Option = .ru {
+    public var option: Option = .ru {
         didSet {
             calendar = CalendarManager.calendar(with: option)
         }
@@ -26,10 +26,8 @@ public final class CalendarManager: ObservableObject {
         return calendar
     }
     
-    init(option: Option) {
+    public init(option: Option) {
         self.option = option
         self.calendar = CalendarManager.calendar(with: option)
     }
 }
-
-let calendarManager = CalendarManager(option: .ru)

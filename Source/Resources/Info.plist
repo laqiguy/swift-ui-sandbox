@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CFBundleExecutable</key>
+	<string>main</string>
+	<key>CFBundleIdentifier</key>
+	<string>$(PRODUCT_BUNDLE_IDENTIFIER)</string>
+	<key>CFBundleShortVersionString</key>
+	<string>$(CURRENT_PROJECT_VERSION)</string>
+	<key>CFBundleVersion</key>
+	<string>$(MARKETING_VERSION)</string>
+	<key>UIAppFonts</key>
+	<array>
+		<string>CoFoRedmadrobot-Regular.otf</string>
+		<string>CoFoSans-Regular.ttf</string>
+	</array>
+	<key>UILaunchScreen</key>
+	<dict/>
+	<key>CFBundleName</key>
+	<string>main</string>
+	<key>CFBundleInfoDictionaryVersion</key>
+	<string>6.0</string>
+	<key>CFBundleDisplayName</key>
+	<string>Toolkit</string>
+</dict>
+</plist>

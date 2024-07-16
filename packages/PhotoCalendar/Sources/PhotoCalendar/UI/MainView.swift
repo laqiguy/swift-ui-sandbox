@@ -7,22 +7,24 @@
 
 import SwiftUI
 import PhotoPicker
-
-struct MainView: View {
+public struct MainView: View {
     
-    @EnvironmentObject var textParameters: TextParameters
+    @EnvironmentObject private var textParameters: TextParameters
     
-    @State var viewModel: MainViewModel
+    @State private var viewModel: MainViewModel
     
-    @State var isShowPhotoPicker: Bool = false
-    @State var isShowFontPicker: Bool = false
-    @State var isShowDatePicker: Bool = false
+    @State private var isShowPhotoPicker: Bool = false
+    @State private var isShowFontPicker: Bool = false
+    @State private var isShowDatePicker: Bool = false
     
-    init(calendarManager: CalendarManager) {
+    private let calendarManager: CalendarManager
+    
+    public init(calendarManager: CalendarManager) {
+        self.calendarManager = calendarManager
         viewModel = MainViewModel(date: Date(), calendarManager: calendarManager)
     }
     
-    var body: some View {
+    public var body: some View {
         ZStack {
             if  let data = viewModel.image,
                 let uiimage = UIImage.init(data: data) {

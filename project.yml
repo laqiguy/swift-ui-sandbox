@@ -25,44 +25,18 @@ settings:
       PRODUCT_BUNDLE_IDENTIFIER: com.lq.sandbox
       BUNDLE_DISPLAY_NAME: SUI Sandbox
 
-schemes:
-  Debug:
-    build:
-      targets:
-        main: all
-        tests: all
-    test:
-      targets:
-        - name: tests 
-    run:
-      config: Debug
-  Release:
-    build:
-      targets:
-        main: all
-        tests: all
-    test:
-      targets:
-        - name: tests
-    run:
-      config: Release
-    archive:
-      config: Release
-    profile:
-      config: Release
-
 targets:
   main:
     type: application
     platform: iOS
-    sources: [Source]
-    resources: [Source/resources]
+    sources: [Source, Configs]
+    resources: [Source/Resources]
     settings:
       GENERATE_INFOPLIST_FILE: YES
       base:
         CODE_SIGN_STYLE: Automatic
         CODE_SIGN_IDENTITY: "Apple Development"
-        CODE_SIGN_ENTITLEMENTS: Source/resources/main.entitlements
+        CODE_SIGN_ENTITLEMENTS: Source/Resources/main.entitlements
         # DEVELOPMENT_TEAM: "66Q5RW6PQQ"
     dependencies:
     - package: Alamofire
@@ -76,18 +50,24 @@ targets:
       GENERATE_INFOPLIST_FILE: YES
     dependencies:
     - package: PhotoCalendar
-  tests:
-    type: bundle.unit-test
-    platform: iOS
-    sources: [Tests]
-    dependencies:
-      - target: main
-    settings:
-      GENERATE_INFOPLIST_FILE: YES
-      base:
-        CODE_SIGN_STYLE: Automatic
-        CODE_SIGN_IDENTITY: "Apple Development"
-        # DEVELOPMENT_TEAM: "66Q5RW6PQQ"
+
+schemes:
+  Debug:
+    build:
+      targets:
+        main: all
+    run:
+      config: Debug
+  Release:
+    build:
+      targets:
+        main: all
+    run:
+      config: Release
+    archive:
+      config: Release
+    profile:
+      config: Release
 
 packages:
   Alamofire:
