@@ -12,7 +12,7 @@ extension Color {
     static var redMadColor: Color = .init(red: 234.0/255, green: 51.0/255, blue: 35.0/255)
 }
 
-final public class TextParameters: ObservableObject {
+public final class TextParameters: ObservableObject {
     var textColors: [Color] = [.white, .black, .redMadColor]
     @Published var mainTextColor: Color = .white {
         didSet {

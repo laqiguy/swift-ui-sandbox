@@ -11,7 +11,7 @@ public struct MainView: View {
     
     @EnvironmentObject private var textParameters: TextParameters
     
-    @State private var viewModel: MainViewModel
+    @ObservedObject private var viewModel: MainViewModel
     
     @State private var isShowPhotoPicker: Bool = false
     @State private var isShowFontPicker: Bool = false
