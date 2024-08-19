@@ -9,7 +9,7 @@ import os
 import SwiftUI
 
 extension Color {
-    static var redMadColor: Color = .init(red: 234.0/255, green: 51.0/255, blue: 35.0/255)
+    static let redMadColor: Color = .init(red: 234.0/255, green: 51.0/255, blue: 35.0/255)
 }
 
 public final class TextParameters: ObservableObject {

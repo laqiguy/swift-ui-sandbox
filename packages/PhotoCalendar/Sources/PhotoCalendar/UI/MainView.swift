@@ -12,10 +12,14 @@ public struct MainView: View {
     @EnvironmentObject private var textParameters: TextParameters
     
     @ObservedObject private var viewModel: MainViewModel
+
+    struct Model {
+        var isShowPhotoPicker: Bool = false
+        var isShowFontPicker: Bool = false
+        var isShowDatePicker: Bool = false
+    }
     
-    @State private var isShowPhotoPicker: Bool = false
-    @State private var isShowFontPicker: Bool = false
-    @State private var isShowDatePicker: Bool = false
+    @State private var model: Model = .init()
     
     private let calendarManager: CalendarManager
     
@@ -30,7 +34,7 @@ public struct MainView: View {
                 let uiimage = UIImage.init(data: data) {
                 ImageZoomDragView(image: Image(uiImage: uiimage))
                     .onTapGesture {
-                        self.isShowPhotoPicker.toggle()
+                        model.isShowPhotoPicker.toggle()
                     }
             }
             VStack(alignment: .center, spacing: 4 * textParameters.scale) {
@@ -45,7 +49,7 @@ public struct MainView: View {
                         color: textParameters.shadowColor,
                         radius: 2)
                     .onTapGesture {
-                        isShowDatePicker = true
+                        model.isShowDatePicker = true
                     }
                 HStack(spacing: 8) {
                     if viewModel.showWeekNumber {
@@ -66,18 +70,18 @@ public struct MainView: View {
                 }
                 .contentShape(Rectangle())
                 .onTapGesture {
-                    isShowFontPicker.toggle()
+                    model.isShowFontPicker.toggle()
                 }
             }
         }
-        .sheet(isPresented: $isShowPhotoPicker) {
-            PhotoPicker(isPresented: $isShowPhotoPicker, imageData: $viewModel.image)
+        .sheet(isPresented: $model.isShowPhotoPicker) {
+            PhotoPicker(isPresented: $model.isShowPhotoPicker, imageData: $viewModel.image)
         }
-        .sheet(isPresented: $isShowFontPicker) {
+        .sheet(isPresented: $model.isShowFontPicker) {
             TextParametersEditorView(
                 isBlurred: $viewModel.isBlurred)
         }
-        .sheet(isPresented: $isShowDatePicker) {
+        .sheet(isPresented: $model.isShowDatePicker) {
             DateEditorView(
                 current: viewModel.current,
                 date: $viewModel.date,

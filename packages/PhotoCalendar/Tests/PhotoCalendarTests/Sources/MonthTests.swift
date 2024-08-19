@@ -84,4 +84,19 @@ import Testing
         #expect(DateGenerator.string(from: month.values[0].values[0].date) == "25.11.2024")
         #expect(DateGenerator.string(from: month.values[5].values[6].date) == "05.01.2025")
     }
+    
+    @Test func Jan2024Test() {
+        let date = DateGenerator.date(from: "01.01.2024")
+        let month = Month(date: date, with: calendar)
+        
+        #expect(month.name == "январь")
+        #expect(month.values.count == 5)
+        #expect(month.values[0].number == 1)
+        #expect(month.values[4].number == 5)
+        for week in month.values {
+            #expect(week.values.count == 7)
+        }
+        #expect(DateGenerator.string(from: month.values[0].values[0].date) == "01.01.2024")
+        #expect(DateGenerator.string(from: month.values[4].values[6].date) == "04.02.2024")
+    }
 }

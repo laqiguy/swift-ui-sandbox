@@ -5,13 +5,14 @@ func generateMonth(for date: Date, with calendar: Calendar) -> [[Date]] {
     let end = Date.Helper.endOfMonth(for: date, with: calendar)
     
     let dateComponents: Set<Calendar.Component> = [.weekOfYear, .year]
-    
-    let startWeek = calendar.dateComponents(dateComponents, from: start)
+        
+    var iterator = calendar.dateComponents(dateComponents, from: start)
     let endWeek = calendar.dateComponents(dateComponents, from: end)
     
-    var iterator = DateComponents(year: startWeek.year!)
-    let endWeekNumber = endWeek.weekOfYear! < startWeek.weekOfYear! ? endWeek.weekOfYear! + 52 : endWeek.weekOfYear!
-    return (startWeek.weekOfYear!...endWeekNumber).map { weekNumber in
+    let startWeekNumber = iterator.weekOfYear!
+    let endWeekNumber = endWeek.weekOfYear! < iterator.weekOfYear! ? endWeek.weekOfYear! + 52 : endWeek.weekOfYear!
+        
+    return (startWeekNumber...endWeekNumber).map { weekNumber in
         iterator.weekOfYear = weekNumber
         return (calendar.firstWeekday...calendar.firstWeekday+6).map { number in
             iterator.weekday = number

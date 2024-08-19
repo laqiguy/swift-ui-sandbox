@@ -35,17 +35,13 @@ struct DateEditorView: View {
     
     @Binding var date: Date
     @Binding var showWeekNumber: Bool
-    
-    private let dateFormatter: DateFormatter = {
-        let formatter = DateFormatter()
-        formatter.locale = .init(identifier: "ru_RU")
-        formatter.dateFormat = "LLLL yyyy"
-        return formatter
-    }()
+
+    private let format: Date.FormatStyle
         
     init(current: Date, date: Binding<Date>, showWeekNumber: Binding<Bool>, calendarManager: CalendarManager) {
         self._showWeekNumber = showWeekNumber
         self._date = date
+        self.format = Date.FormatStyle.dateTime.locale(calendarManager.locale).month(.wide).year()
         self.viewModel = .init(currentDate: current, selectedDate: date.wrappedValue, calendarManager: calendarManager)
     }
     
@@ -74,11 +70,11 @@ struct DateEditorView: View {
                 }
                 .onChange(of: viewModel.selectedMonth, perform: { newValue in
                     let dateString = "\(viewModel.months[newValue]) \(viewModel.years[viewModel.selectedYear])"
-                    date = dateFormatter.date(from: dateString) ?? date
+                    date = (try? Date(dateString, strategy: format)) ?? date
                 })
                 .onChange(of: viewModel.selectedYear, perform: { newValue in
                     let dateString = "\(viewModel.months[viewModel.selectedMonth]) \(viewModel.years[newValue])"
-                    date = dateFormatter.date(from: dateString) ?? date
+                    date = (try? Date(dateString, strategy: format)) ?? date
                 })
                 .pickerStyle(.wheel)
             }
